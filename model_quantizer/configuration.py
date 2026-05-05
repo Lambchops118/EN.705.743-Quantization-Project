@@ -1,0 +1,295 @@
+"""Configuration loading and validation utilities."""
+
+from __future__ import annotations
+
+import os
+import yaml
+from   pathlib     import Path
+from   dataclasses import dataclass, field
+from   typing      import Any, Dict, Iterable, List, Optional
+
+
+@dataclass(frozen=True)
+class PathsConfig:
+    """Filesystem locations used by the pipeline."""
+
+    raw_models_dir:        Path
+    quantized_models_dir:  Path
+    logs_dir:              Path
+    metadata_dir:          Path
+    benchmark_results_dir: Path
+    benchmark_cache_dir:   Path
+
+
+@dataclass(frozen=True)
+class RuntimeConfig:
+    """Project-wide runtime settings."""
+
+    default_device: str      = "auto"
+    max_shard_size_mb: int   = 2048
+    prefer_safetensors: bool = True
+    passthrough_float_dtype: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class ModelConfig:
+    """A single user-selectable model definition."""
+
+    name:              str
+    hf_id:             str
+    revision:          str           = "main"
+    torch_dtype:       str           = "float16"
+    trust_remote_code: bool          = False
+    auth_token_env:    Optional[str] = None
+    enabled:           bool          = True
+
+
+@dataclass(frozen=True)
+class QuantizerConfig:
+    """A single quantizer definition from config."""
+
+    name:    str
+    type:    str
+    enabled: bool           = True
+    options: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class BenchmarkTaskConfig:
+    """A single benchmark task definition."""
+
+    name:           str
+    type:           str
+    source:         str            = "hub"
+    dataset_name:   Optional[str]  = None
+    dataset_config: Optional[str]  = None
+    revision:       str            = "main"
+    split:          str            = "validation"
+    local_path:     Optional[Path] = None
+    subjects:       List[str]      = field(default_factory=list)
+    max_examples:   Optional[int]  = None
+    enabled:        bool           = True
+
+
+@dataclass(frozen=True)
+class BenchmarksConfig:
+    """Project-wide benchmark settings."""
+
+    system_prompt:                            Optional[str] = None
+    use_chat_template:                        bool          = False
+    delete_quantized_artifacts_after_success: bool          = True
+    tasks:                                    Dict[str, BenchmarkTaskConfig] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class S3OutputConfig:
+    """Optional remote output sink for run artifacts."""
+
+    enabled:      bool          = False
+    bucket:       Optional[str] = None
+    prefix:       str           = ""
+    region:       Optional[str] = None
+    endpoint_url: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class ProjectConfig:
+    """The fully parsed project configuration."""
+
+    source_path: Path
+    paths:       PathsConfig
+    runtime:     RuntimeConfig
+    benchmarks:  BenchmarksConfig
+    output_s3:   S3OutputConfig
+    models:      Dict[str, ModelConfig]
+    quantizers:  Dict[str, QuantizerConfig]
+
+    def resolve_model_names(
+        self,
+        requested: Optional[Iterable[str]],
+        include_all: bool,
+    ) -> List[str]:
+        """Resolve CLI model selection into validated model names."""
+
+        if include_all or not requested:
+            return [name for name, item in self.models.items() if item.enabled]
+
+        requested_names = list(dict.fromkeys(requested))
+        unknown         = [name for name in requested_names if name not in self.models]
+        if unknown:
+            raise ValueError(f"Unknown model(s): {', '.join(unknown)}")
+        return requested_names
+
+    def resolve_quantizer_names(
+        self,
+        requested: Optional[Iterable[str]],
+        include_all: bool,
+    ) -> List[str]:
+        """Resolve CLI quantizer selection into validated quantizer names."""
+
+        if include_all or not requested:
+            return [name for name, item in self.quantizers.items() if item.enabled]
+
+        requested_names = list(dict.fromkeys(requested))
+        unknown         = [name for name in requested_names if name not in self.quantizers]
+        if unknown:
+            raise ValueError(f"Unknown quantizer(s): {', '.join(unknown)}")
+        return requested_names
+
+    def resolve_benchmark_names(
+        self,
+        requested: Optional[Iterable[str]],
+    ) -> List[str]:
+        """Resolve benchmark selection into validated task names."""
+
+        if not requested:
+            return [name for name, item in self.benchmarks.tasks.items() if item.enabled]
+
+        requested_names = list(dict.fromkeys(requested))
+        unknown         = [name for name in requested_names if name not in self.benchmarks.tasks]
+        if unknown:
+            raise ValueError(f"Unknown benchmark(s): {', '.join(unknown)}")
+        return requested_names
+
+
+def _coerce_paths(base_dir: Path, raw: Dict[str, Any]) -> PathsConfig:
+    """Build path configuration relative to the config file directory."""
+
+    return PathsConfig(
+        raw_models_dir        = (base_dir / raw["raw_models_dir"]).resolve(),
+        quantized_models_dir  = (base_dir / raw["quantized_models_dir"]).resolve(),
+        logs_dir              = (base_dir / raw["logs_dir"]).resolve(),
+        metadata_dir          = (base_dir / raw["metadata_dir"]).resolve(),
+        benchmark_results_dir =(
+            base_dir / raw.get("benchmark_results_dir", "artifacts/benchmarks")
+        ).resolve(),
+        benchmark_cache_dir   =(
+            base_dir / raw.get("benchmark_cache_dir", "artifacts/datasets")
+        ).resolve(),
+    )
+
+
+def _coerce_runtime(raw: Dict[str, Any]) -> RuntimeConfig:
+    """Build runtime configuration with defaults."""
+
+    return RuntimeConfig(
+        default_device          = str(raw.get("default_device", "auto")),
+        max_shard_size_mb       = int(raw.get("max_shard_size_mb", 2048)),
+        prefer_safetensors      = bool(raw.get("prefer_safetensors", True)),
+        passthrough_float_dtype = raw.get("passthrough_float_dtype"),
+    )
+
+
+def _coerce_models(raw: Dict[str, Dict[str, Any]]) -> Dict[str, ModelConfig]:
+    """Build typed model definitions."""
+
+    return {
+        name: ModelConfig(
+            name              = name,
+            hf_id             = str(item["hf_id"]),
+            revision          = str(item.get("revision", "main")),
+            torch_dtype       = str(item.get("torch_dtype", "float16")),
+            trust_remote_code = bool(item.get("trust_remote_code", False)),
+            auth_token_env    = item.get("auth_token_env"),
+            enabled           = bool(item.get("enabled", True)),
+        )
+        for name, item in raw.items()
+    }
+
+
+def _coerce_quantizers(raw: Dict[str, Dict[str, Any]]) -> Dict[str, QuantizerConfig]:
+    """Build typed quantizer definitions."""
+
+    quantizers: Dict[str, QuantizerConfig] = {}
+    for name, item in raw.items():
+        options          = dict(item)
+        quantizer_type   = str(options.pop("type"))
+        enabled          = bool(options.pop("enabled", True))
+        quantizers[name] = QuantizerConfig(
+            name    = name,
+            type    = quantizer_type,
+            enabled = enabled,
+            options = options,
+        )
+    return quantizers
+
+
+def _coerce_benchmarks(base_dir: Path, raw: Dict[str, Any]) -> BenchmarksConfig:
+    """Build benchmark configuration with defaults."""
+
+    tasks: Dict[str, BenchmarkTaskConfig] = {}
+    for name, item in (raw.get("tasks", {}) or {}).items():
+        local_path  = item.get("local_path")
+        tasks[name] = BenchmarkTaskConfig(
+            name           = name,
+            type           = str(item["type"]),
+            source         = str(item.get("source", "hub")),
+            dataset_name   = item.get("dataset_name"),
+            dataset_config = item.get("dataset_config"),
+            revision       = str(item.get("revision", "main")),
+            split          = str(item.get("split", "validation")),
+            local_path     = ((base_dir / local_path).resolve() if local_path else None),
+            subjects       = [str(subject) for subject in item.get("subjects", [])],
+            max_examples   = (
+                int(item["max_examples"]) if item.get("max_examples") is not None else None
+            ),
+            enabled = bool(item.get("enabled", True)),
+        )
+
+    return BenchmarksConfig(
+        system_prompt     = raw.get("system_prompt"),
+        use_chat_template = bool(raw.get("use_chat_template", False)),
+        delete_quantized_artifacts_after_success=bool(
+            raw.get("delete_quantized_artifacts_after_success", True)
+        ),
+        tasks=tasks,
+    )
+
+
+def _coerce_output_s3(raw: Dict[str, Any]) -> S3OutputConfig:
+    """Build optional S3 output configuration, allowing env overrides."""
+
+    bucket = os.getenv("MQ_OUTPUT_S3_BUCKET", raw.get("bucket"))
+    prefix = os.getenv("MQ_OUTPUT_S3_PREFIX", raw.get("prefix", ""))
+    region = os.getenv("MQ_OUTPUT_S3_REGION", raw.get("region"))
+    endpoint_url = os.getenv("MQ_OUTPUT_S3_ENDPOINT_URL", raw.get("endpoint_url"))
+
+    enabled_override = os.getenv("MQ_OUTPUT_S3_ENABLED")
+    if enabled_override is None:
+        enabled = bool(raw.get("enabled", False) or bucket)
+    else:
+        enabled = enabled_override.strip().lower() in {"1", "true", "yes", "on"}
+
+    normalized_prefix = str(prefix or "").strip().strip("/")
+    if enabled and not bucket:
+        raise ValueError(
+            "S3 output is enabled but no bucket is configured. "
+            "Set outputs.s3.bucket or MQ_OUTPUT_S3_BUCKET."
+        )
+
+    return S3OutputConfig(
+        enabled = enabled,
+        bucket  = str(bucket) if bucket else None,
+        prefix  = normalized_prefix,
+        region  = str(region) if region else None,
+        endpoint_url = str(endpoint_url) if endpoint_url else None,
+    )
+
+
+def load_project_config(path: Path) -> ProjectConfig:
+    """Load project configuration from YAML."""
+
+    resolved = path.resolve()
+    with resolved.open("r", encoding="utf-8") as handle:
+        payload = yaml.safe_load(handle) or {}
+
+    base_dir = resolved.parent.parent if resolved.parent.name == "config" else resolved.parent
+    return ProjectConfig(
+        source_path=resolved,
+        paths      = _coerce_paths(base_dir, payload["paths"]),
+        runtime    = _coerce_runtime(payload.get("runtime", {})),
+        benchmarks = _coerce_benchmarks(base_dir, payload.get("benchmarks", {})),
+        output_s3  = _coerce_output_s3((payload.get("outputs", {}) or {}).get("s3", {})),
+        models     = _coerce_models(payload["models"]),
+        quantizers = _coerce_quantizers(payload["quantizers"]),
+    )

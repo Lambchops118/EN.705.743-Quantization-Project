@@ -1,0 +1,42 @@
+{
+  "accuracy": 0.733021,
+  "avg_predicted_choice_tokens": 34.738,
+  "avg_prompt_tokens": 116.143,
+  "benchmark_metadata": {
+    "max_examples": null,
+    "source": "hub",
+    "subjects": []
+  },
+  "benchmark_name": "hellaswag",
+  "benchmark_type": "hellaswag",
+  "correct_count": 7361,
+  "dataset_config": null,
+  "dataset_name": "Rowan/hellaswag",
+  "dataset_revision": "main",
+  "evaluation_seconds": 447.162,
+  "example_count": 10042,
+  "examples_per_second": 22.457,
+  "load_seconds": 241.485,
+  "max_cuda_memory_allocated_gb": 13.676,
+  "max_cuda_memory_reserved_gb": 15.373,
+  "model_name": "mistral-7b",
+  "predictions_path": "/workspace/app/artifacts/benchmarks/mistral-7b/int8_per_tensor/hellaswag.predictions.jsonl",
+  "predictions_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/mistral-7b/int8_per_tensor/hellaswag.predictions.jsonl",
+  "quantizer_name": "int8_per_tensor",
+  "source": "quantized",
+  "source_metrics": {
+    "artifact_original_size_bytes": 14496047104,
+    "artifact_quantized_size_bytes": 7382508420,
+    "artifact_runtime_seconds": 27.122,
+    "compression_ratio": 1.963567,
+    "source_disk_size_bytes": 7386432001,
+    "source_path": "/workspace/app/models/quantized/mistral-7b/int8_per_tensor"
+  },
+  "split": "validation",
+  "status": "success",
+  "summary_path": "/workspace/app/artifacts/benchmarks/mistral-7b/int8_per_tensor/hellaswag.summary.json",
+  "summary_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/mistral-7b/int8_per_tensor/hellaswag.summary.json",
+  "system_prompt": "You are taking a multiple-choice evaluation.\nReturn the most likely answer based only on the prompt.\n",
+  "total_forward_passes": 40168,
+  "variant_label": "int8_per_tensor"
+}

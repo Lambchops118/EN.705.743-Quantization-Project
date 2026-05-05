@@ -1,0 +1,72 @@
+\begin{thebibliography}{10}
+
+\bibitem{abdin2024phi3}
+Marah Abdin et~al.
+\newblock Phi-3 technical report: A highly capable language model locally on
+  your phone.
+\newblock {\em arXiv preprint arXiv:2404.14219}, 2024.
+
+\bibitem{cheng2017compression}
+Yu~Cheng, Duo Wang, Pan Zhou, and Tao Zhang.
+\newblock A survey of model compression and acceleration for deep neural
+  networks.
+\newblock {\em arXiv preprint arXiv:1710.09282}, 2017.
+
+\bibitem{dettmers2022llmint8}
+Tim Dettmers, Mike Lewis, Younes Belkada, and Luke Zettlemoyer.
+\newblock Llm.int8(): 8-bit matrix multiplication for transformers at scale.
+\newblock In {\em Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem{gemma2}
+{Gemma Team} and Google DeepMind.
+\newblock Gemma 2: Improving open language models at a practical size.
+\newblock {\em arXiv preprint arXiv:2408.00118}, 2024.
+
+\bibitem{gholami2021surveyquantization}
+Amir Gholami, Sehoon Kim, Zhen Dong, Zhewei Yao, Michael~W. Mahoney, and Kurt
+  Keutzer.
+\newblock A survey of quantization methods for efficient neural network
+  inference.
+\newblock {\em arXiv preprint arXiv:2103.13630}, 2021.
+
+\bibitem{hendrycks2021mmlu}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+  Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In {\em International Conference on Learning Representations}, 2021.
+
+\bibitem{jiang2023mistral}
+Albert~Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, et~al.
+\newblock Mistral 7b.
+\newblock {\em arXiv preprint arXiv:2310.06825}, 2023.
+
+\bibitem{llama3herd}
+{Llama Team, AI @ Meta}.
+\newblock The llama 3 herd of models.
+\newblock {\em arXiv preprint arXiv:2407.21783}, 2024.
+
+\bibitem{wu2020integerquantization}
+Hao Wu, Patrick Judd, Xiaojie Zhang, Mikhail Isaev, and Paulius Micikevicius.
+\newblock Integer quantization for deep learning inference: Principles and
+  empirical evaluation.
+\newblock {\em arXiv preprint arXiv:2004.09602}, 2020.
+
+\bibitem{xiao2023smoothquant}
+Guangxuan Xiao, Ji~Lin, Mickael Seznec, Hao Wu, Julien Demouth, and Song Han.
+\newblock Smoothquant: Accurate and efficient post-training quantization for
+  large language models.
+\newblock In {\em International Conference on Machine Learning}, 2023.
+
+\bibitem{zellers2019hellaswag}
+Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi.
+\newblock Hellaswag: Can a machine really finish your sentence?
+\newblock In {\em Proceedings of the 57th Annual Meeting of the Association for
+  Computational Linguistics}, pages 4791--4800, Florence, Italy, 2019.
+  Association for Computational Linguistics.
+
+\bibitem{zhu2023llmcompression}
+Xunyu Zhu, Jian Li, Yong Liu, Can Ma, and Weiping Wang.
+\newblock A survey on model compression for large language models.
+\newblock {\em arXiv preprint arXiv:2308.07633}, 2023.
+
+\end{thebibliography}

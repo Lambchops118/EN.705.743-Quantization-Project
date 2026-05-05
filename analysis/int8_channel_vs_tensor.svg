@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="640" viewBox="0 0 1080 640">
+<rect width="100%" height="100%" fill="white" />
+<text x="540.0" y="32" text-anchor="middle" font-size="24" font-family="Arial">int8 per-channel minus per-tensor accuracy delta</text>
+<text x="540.0" y="54" text-anchor="middle" font-size="14" font-family="Arial" fill="#555">Positive values mean channel-wise scaling helped.</text>
+<line x1="90" y1="540" x2="940" y2="540" stroke="black" stroke-width="2" />
+<line x1="90" y1="70" x2="90" y2="540" stroke="black" stroke-width="2" />
+<text x="28" y="52" font-size="16" font-family="Arial">Accuracy delta</text>
+<line x1="90" y1="540.0" x2="940" y2="540.0" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="545.0" text-anchor="end" font-size="13" font-family="Arial">-0.04</text>
+<line x1="90" y1="461.66666666666663" x2="940" y2="461.66666666666663" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="466.66666666666663" text-anchor="end" font-size="13" font-family="Arial">-0.03</text>
+<line x1="90" y1="383.3333333333333" x2="940" y2="383.3333333333333" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="388.3333333333333" text-anchor="end" font-size="13" font-family="Arial">-0.01</text>
+<line x1="90" y1="305.0" x2="940" y2="305.0" stroke="#999999" stroke-width="1.5" />
+<text x="78" y="310.0" text-anchor="end" font-size="13" font-family="Arial">+0.00</text>
+<line x1="90" y1="226.66666666666663" x2="940" y2="226.66666666666663" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="231.66666666666663" text-anchor="end" font-size="13" font-family="Arial">+0.01</text>
+<line x1="90" y1="148.33333333333337" x2="940" y2="148.33333333333337" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="153.33333333333337" text-anchor="end" font-size="13" font-family="Arial">+0.03</text>
+<line x1="90" y1="70.0" x2="940" y2="70.0" stroke="#e1e1e1" stroke-width="1" />
+<text x="78" y="75.0" text-anchor="end" font-size="13" font-family="Arial">+0.04</text>
+<rect x="143.45" y="305.0" width="48" height="3.2626744186044334" fill="#2a5b8a" opacity="0.88" />
+<text x="167.45" y="324.26267441860443" text-anchor="middle" font-size="11" font-family="Arial" fill="#2a5b8a">-0.0006</text>
+<rect x="201.05" y="305.0" width="48" height="149.45453488372067" fill="#c5671c" opacity="0.88" />
+<text x="225.05" y="470.45453488372067" text-anchor="middle" font-size="11" font-family="Arial" fill="#c5671c">-0.0273</text>
+<text x="196.25" y="566" text-anchor="middle" font-size="13" font-family="Arial">gemma-2-9b</text>
+<rect x="355.95" y="215.74918604651168" width="48" height="89.25081395348832" fill="#2a5b8a" opacity="0.88" />
+<text x="379.95" y="207.74918604651168" text-anchor="middle" font-size="11" font-family="Arial" fill="#2a5b8a">+0.0163</text>
+<rect x="413.55" y="125.96825581395353" width="48" height="179.03174418604647" fill="#c5671c" opacity="0.88" />
+<text x="437.55" y="117.96825581395353" text-anchor="middle" font-size="11" font-family="Arial" fill="#c5671c">+0.0328</text>
+<text x="408.75" y="566" text-anchor="middle" font-size="13" font-family="Arial">llama-3-8b</text>
+<rect x="568.45" y="305.0" width="48" height="1.0" fill="#2a5b8a" opacity="0.88" />
+<text x="592.45" y="297.0" text-anchor="middle" font-size="11" font-family="Arial" fill="#2a5b8a">+0.0000</text>
+<rect x="626.05" y="305.0" width="48" height="86.40348837209297" fill="#c5671c" opacity="0.88" />
+<text x="650.05" y="407.40348837209297" text-anchor="middle" font-size="11" font-family="Arial" fill="#c5671c">-0.0158</text>
+<text x="621.25" y="566" text-anchor="middle" font-size="13" font-family="Arial">mistral-7b</text>
+<rect x="780.95" y="239.69186046511618" width="48" height="65.30813953488382" fill="#2a5b8a" opacity="0.88" />
+<text x="804.95" y="231.69186046511618" text-anchor="middle" font-size="11" font-family="Arial" fill="#2a5b8a">+0.0120</text>
+<rect x="838.55" y="159.0486046511627" width="48" height="145.9513953488373" fill="#c5671c" opacity="0.88" />
+<text x="862.55" y="151.0486046511627" text-anchor="middle" font-size="11" font-family="Arial" fill="#c5671c">+0.0267</text>
+<text x="833.75" y="566" text-anchor="middle" font-size="13" font-family="Arial">phi-3</text>
+<rect x="950" y="108" width="16" height="16" fill="#2a5b8a" opacity="0.88" />
+<text x="976" y="121" font-size="13" font-family="Arial">hellaswag</text>
+<rect x="950" y="136" width="16" height="16" fill="#c5671c" opacity="0.88" />
+<text x="976" y="149" font-size="13" font-family="Arial">mmlu</text>
+</svg>

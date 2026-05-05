@@ -1,0 +1,27 @@
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+*.pyc
+.Python
+model_quantizer.egg-info/
+dist/
+build/
+
+models/raw/*
+!models/raw/.gitkeep
+models/quantized/*
+!models/quantized/.gitkeep
+artifacts/metadata/*
+!artifacts/metadata/.gitkeep
+
+artifacts/datasets/*
+logs/*
+!logs/.gitkeep
+
+# Local tooling / downloads
+vs_buildtools.exe
+.codex

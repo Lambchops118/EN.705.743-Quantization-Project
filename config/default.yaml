@@ -1,0 +1,101 @@
+paths:
+  raw_models_dir: models/raw
+  quantized_models_dir: models/quantized
+  logs_dir: logs
+  metadata_dir: artifacts/metadata
+  benchmark_results_dir: artifacts/benchmarks
+  benchmark_cache_dir: artifacts/datasets
+
+runtime:
+  default_device: auto
+  max_shard_size_mb: 2048
+  prefer_safetensors: true
+  passthrough_float_dtype: null
+
+outputs:
+  s3:
+    enabled: false
+    bucket: null
+    prefix: model-quantizer
+    region: null
+    endpoint_url: null
+
+benchmarks:
+  system_prompt: |
+    You are taking a multiple-choice evaluation.
+    Return the most likely answer based only on the prompt.
+  use_chat_template: false
+  delete_quantized_artifacts_after_success: true
+  tasks:
+    hellaswag:
+      type: hellaswag
+      source: hub
+      dataset_name: Rowan/hellaswag
+      split: validation
+      enabled: true
+    mmlu:
+      type: mmlu
+      source: hub
+      dataset_name: cais/mmlu
+      dataset_config: all
+      split: test
+      enabled: true
+
+models:
+  gemma-2-27b:
+    hf_id: google/gemma-2-27b
+    revision: main
+    torch_dtype: bfloat16
+    trust_remote_code: false
+    auth_token_env: HF_TOKEN
+    enabled: true
+  gemma-2-9b:
+    hf_id: google/gemma-2-9b
+    revision: main
+    torch_dtype: bfloat16
+    trust_remote_code: false
+    auth_token_env: HF_TOKEN
+    enabled: true
+  llama-3-8b:
+    hf_id: meta-llama/Meta-Llama-3-8B
+    revision: main
+    torch_dtype: bfloat16
+    trust_remote_code: false
+    auth_token_env: HF_TOKEN
+    enabled: true
+  mistral-7b:
+    hf_id: mistralai/Mistral-7B-v0.3
+    revision: main
+    torch_dtype: float16
+    trust_remote_code: false
+    auth_token_env: HF_TOKEN
+    enabled: true
+  phi-3:
+    hf_id: microsoft/Phi-3-mini-4k-instruct
+    revision: main
+    torch_dtype: bfloat16
+    trust_remote_code: true
+    auth_token_env: HF_TOKEN
+    enabled: true
+  mixtral-8x7b:
+    hf_id: mistralai/Mixtral-8x7B-v0.1
+    revision: main
+    torch_dtype: bfloat16
+    trust_remote_code: false
+    auth_token_env: HF_TOKEN
+    enabled: false
+
+quantizers:
+  int8_per_tensor:
+    type: int8
+    granularity: per_tensor
+    enabled: true
+  int8_per_channel:
+    type: int8
+    granularity: per_channel
+    channel_axis: 0
+    enabled: true
+  int4_grouped:
+    type: int4
+    group_size: 128
+    enabled: true

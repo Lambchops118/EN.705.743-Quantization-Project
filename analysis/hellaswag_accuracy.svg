@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+<rect width="100%" height="100%" fill="white" />
+<text x="500.0" y="30" text-anchor="middle" font-size="22" font-family="Arial">HELLASWAG accuracy by quantization method</text>
+<line x1="90" y1="520" x2="780" y2="520" stroke="black" stroke-width="2" />
+<line x1="90" y1="60" x2="90" y2="520" stroke="black" stroke-width="2" />
+<text x="35" y="45" font-size="16" font-family="Arial">Accuracy</text>
+<line x1="90" y1="520.0" x2="780" y2="520.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="525.0" text-anchor="end" font-size="14" font-family="Arial">0.0</text>
+<line x1="90" y1="428.0" x2="780" y2="428.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="433.0" text-anchor="end" font-size="14" font-family="Arial">0.2</text>
+<line x1="90" y1="336.0" x2="780" y2="336.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="341.0" text-anchor="end" font-size="14" font-family="Arial">0.4</text>
+<line x1="90" y1="244.0" x2="780" y2="244.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="249.0" text-anchor="end" font-size="14" font-family="Arial">0.6</text>
+<line x1="90" y1="152.0" x2="780" y2="152.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="157.0" text-anchor="end" font-size="14" font-family="Arial">0.8</text>
+<line x1="90" y1="60.0" x2="780" y2="60.0" stroke="#d0d0d0" stroke-width="1" />
+<text x="78" y="65.0" text-anchor="end" font-size="14" font-family="Arial">1.0</text>
+<text x="90.0" y="550" text-anchor="middle" font-size="14" font-family="Arial">raw</text>
+<text x="320.0" y="550" text-anchor="middle" font-size="14" font-family="Arial">int8_per_channel</text>
+<text x="550.0" y="550" text-anchor="middle" font-size="14" font-family="Arial">int8_per_tensor</text>
+<text x="780.0" y="550" text-anchor="middle" font-size="14" font-family="Arial">int4_grouped</text>
+<polyline points="90.0,199.16334 320.0,199.94212 550.0,199.66750000000002 780.0,205.85128000000003" fill="none" stroke="#1f77b4" stroke-width="3" />
+<circle cx="90.0" cy="199.16334" r="5" fill="#1f77b4" />
+<circle cx="320.0" cy="199.94212" r="5" fill="#1f77b4" />
+<circle cx="550.0" cy="199.66750000000002" r="5" fill="#1f77b4" />
+<circle cx="780.0" cy="205.85128000000003" r="5" fill="#1f77b4" />
+<line x1="800" y1="90" x2="824" y2="90" stroke="#1f77b4" stroke-width="3" />
+<circle cx="812" cy="90" r="5" fill="#1f77b4" />
+<text x="835" y="95" font-size="14" font-family="Arial">gemma-2-9b</text>
+<polyline points="90.0,200.99598000000003 320.0,201.95783999999998 550.0,209.4701 780.0,199.0718" fill="none" stroke="#d62728" stroke-width="3" />
+<circle cx="90.0" cy="200.99598000000003" r="5" fill="#d62728" />
+<circle cx="320.0" cy="201.95783999999998" r="5" fill="#d62728" />
+<circle cx="550.0" cy="209.4701" r="5" fill="#d62728" />
+<circle cx="780.0" cy="199.0718" r="5" fill="#d62728" />
+<line x1="800" y1="118" x2="824" y2="118" stroke="#d62728" stroke-width="3" />
+<circle cx="812" cy="118" r="5" fill="#d62728" />
+<text x="835" y="123" font-size="14" font-family="Arial">llama-3-8b</text>
+<polyline points="90.0,182.90188 320.0,182.81034 550.0,182.81034 780.0,188.53596" fill="none" stroke="#2ca02c" stroke-width="3" />
+<circle cx="90.0" cy="182.90188" r="5" fill="#2ca02c" />
+<circle cx="320.0" cy="182.81034" r="5" fill="#2ca02c" />
+<circle cx="550.0" cy="182.81034" r="5" fill="#2ca02c" />
+<circle cx="780.0" cy="188.53596" r="5" fill="#2ca02c" />
+<line x1="800" y1="146" x2="824" y2="146" stroke="#2ca02c" stroke-width="3" />
+<circle cx="812" cy="146" r="5" fill="#2ca02c" />
+<text x="835" y="151" font-size="14" font-family="Arial">mistral-7b</text>
+<polyline points="90.0,186.97886 320.0,181.25277999999997 550.0,186.74978 780.0,187.80318" fill="none" stroke="#ff7f0e" stroke-width="3" />
+<circle cx="90.0" cy="186.97886" r="5" fill="#ff7f0e" />
+<circle cx="320.0" cy="181.25277999999997" r="5" fill="#ff7f0e" />
+<circle cx="550.0" cy="186.74978" r="5" fill="#ff7f0e" />
+<circle cx="780.0" cy="187.80318" r="5" fill="#ff7f0e" />
+<line x1="800" y1="174" x2="824" y2="174" stroke="#ff7f0e" stroke-width="3" />
+<circle cx="812" cy="174" r="5" fill="#ff7f0e" />
+<text x="835" y="179" font-size="14" font-family="Arial">phi-3</text>
+<text x="90.0" y="200.90188" text-anchor="middle" font-size="12" font-family="Arial" fill="#1f77b4">0.697471</text>
+<text x="320.0" y="199.25277999999997" text-anchor="middle" font-size="12" font-family="Arial" fill="#1f77b4">0.695778</text>
+<text x="550.0" y="200.81034" text-anchor="middle" font-size="12" font-family="Arial" fill="#1f77b4">0.696375</text>
+<text x="780.0" y="219.80318" text-anchor="middle" font-size="12" font-family="Arial" fill="#1f77b4">0.682932</text>
+<text x="90.0" y="214.90188" text-anchor="middle" font-size="12" font-family="Arial" fill="#d62728">0.693487</text>
+<text x="320.0" y="213.25277999999997" text-anchor="middle" font-size="12" font-family="Arial" fill="#d62728">0.691396</text>
+<text x="550.0" y="214.81034" text-anchor="middle" font-size="12" font-family="Arial" fill="#d62728">0.675065</text>
+<text x="780.0" y="205.80318" text-anchor="middle" font-size="12" font-family="Arial" fill="#d62728">0.697670</text>
+<text x="90.0" y="172.90188" text-anchor="middle" font-size="12" font-family="Arial" fill="#2ca02c">0.732822</text>
+<text x="320.0" y="185.25277999999997" text-anchor="middle" font-size="12" font-family="Arial" fill="#2ca02c">0.733021</text>
+<text x="550.0" y="172.81034" text-anchor="middle" font-size="12" font-family="Arial" fill="#2ca02c">0.733021</text>
+<text x="780.0" y="191.80318" text-anchor="middle" font-size="12" font-family="Arial" fill="#2ca02c">0.720574</text>
+<text x="90.0" y="186.90188" text-anchor="middle" font-size="12" font-family="Arial" fill="#ff7f0e">0.723959</text>
+<text x="320.0" y="171.25277999999997" text-anchor="middle" font-size="12" font-family="Arial" fill="#ff7f0e">0.736407</text>
+<text x="550.0" y="186.81034" text-anchor="middle" font-size="12" font-family="Arial" fill="#ff7f0e">0.724457</text>
+<text x="780.0" y="177.80318" text-anchor="middle" font-size="12" font-family="Arial" fill="#ff7f0e">0.722167</text>
+</svg>

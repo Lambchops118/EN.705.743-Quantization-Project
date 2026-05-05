@@ -1,0 +1,42 @@
+{
+  "accuracy": 0.695778,
+  "avg_predicted_choice_tokens": 31.849,
+  "avg_prompt_tokens": 102.421,
+  "benchmark_metadata": {
+    "max_examples": null,
+    "source": "hub",
+    "subjects": []
+  },
+  "benchmark_name": "hellaswag",
+  "benchmark_type": "hellaswag",
+  "correct_count": 6987,
+  "dataset_config": null,
+  "dataset_name": "Rowan/hellaswag",
+  "dataset_revision": "main",
+  "evaluation_seconds": 2993.086,
+  "example_count": 10042,
+  "examples_per_second": 3.355,
+  "load_seconds": 126.182,
+  "max_cuda_memory_allocated_gb": 36.774,
+  "max_cuda_memory_reserved_gb": 62.424,
+  "model_name": "gemma-2-9b",
+  "predictions_path": "/workspace/app/artifacts/benchmarks/gemma-2-9b/int8_per_channel/hellaswag.predictions.jsonl",
+  "predictions_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/gemma-2-9b/int8_per_channel/hellaswag.predictions.jsonl",
+  "quantizer_name": "int8_per_channel",
+  "source": "quantized",
+  "source_metrics": {
+    "artifact_original_size_bytes": 36966823936,
+    "artifact_quantized_size_bytes": 12003432448,
+    "artifact_runtime_seconds": 17.964,
+    "compression_ratio": 3.079688,
+    "source_disk_size_bytes": 12038173541,
+    "source_path": "/workspace/app/models/quantized/gemma-2-9b/int8_per_channel"
+  },
+  "split": "validation",
+  "status": "success",
+  "summary_path": "/workspace/app/artifacts/benchmarks/gemma-2-9b/int8_per_channel/hellaswag.summary.json",
+  "summary_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/gemma-2-9b/int8_per_channel/hellaswag.summary.json",
+  "system_prompt": "You are taking a multiple-choice evaluation.\nReturn the most likely answer based only on the prompt.\n",
+  "total_forward_passes": 40168,
+  "variant_label": "int8_per_channel"
+}

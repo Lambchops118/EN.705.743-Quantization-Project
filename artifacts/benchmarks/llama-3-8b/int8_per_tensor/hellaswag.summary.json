@@ -1,0 +1,42 @@
+{
+  "accuracy": 0.675065,
+  "avg_predicted_choice_tokens": 32.01,
+  "avg_prompt_tokens": 97.283,
+  "benchmark_metadata": {
+    "max_examples": null,
+    "source": "hub",
+    "subjects": []
+  },
+  "benchmark_name": "hellaswag",
+  "benchmark_type": "hellaswag",
+  "correct_count": 6779,
+  "dataset_config": null,
+  "dataset_name": "Rowan/hellaswag",
+  "dataset_revision": "main",
+  "evaluation_seconds": 423.625,
+  "example_count": 10042,
+  "examples_per_second": 23.705,
+  "load_seconds": 270.709,
+  "max_cuda_memory_allocated_gb": 15.526,
+  "max_cuda_memory_reserved_gb": 23.387,
+  "model_name": "llama-3-8b",
+  "predictions_path": "/workspace/app/artifacts/benchmarks/llama-3-8b/int8_per_tensor/hellaswag.predictions.jsonl",
+  "predictions_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/llama-3-8b/int8_per_tensor/hellaswag.predictions.jsonl",
+  "quantizer_name": "int8_per_tensor",
+  "source": "quantized",
+  "source_metrics": {
+    "artifact_original_size_bytes": 16060522496,
+    "artifact_quantized_size_bytes": 8555864964,
+    "artifact_runtime_seconds": 27.526,
+    "compression_ratio": 1.877136,
+    "source_disk_size_bytes": 8573326716,
+    "source_path": "/workspace/app/models/quantized/llama-3-8b/int8_per_tensor"
+  },
+  "split": "validation",
+  "status": "success",
+  "summary_path": "/workspace/app/artifacts/benchmarks/llama-3-8b/int8_per_tensor/hellaswag.summary.json",
+  "summary_uri": "s3://model-quantizer/runai/model-quantizer/artifacts/benchmarks/llama-3-8b/int8_per_tensor/hellaswag.summary.json",
+  "system_prompt": "You are taking a multiple-choice evaluation.\nReturn the most likely answer based only on the prompt.\n",
+  "total_forward_passes": 40168,
+  "variant_label": "int8_per_tensor"
+}
